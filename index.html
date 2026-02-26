@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISA Creator Registration</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+}
+
+body{
+background:#02030a;
+color:white;
+overflow:hidden;
+}
+
+/* ================= INTRO ================= */
+
+.intro{
+position:fixed;
+width:100%;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+background:#02030a;
+z-index:10;
+transition:opacity 1s ease;
+}
+
+.intro h1{
+font-size:42px;
+color:#00c3ff;
+text-shadow:0 0 20px #00aaff,0 0 40px #0077ff;
+opacity:0;
+animation:fadeIn 2s forwards;
+}
+
+.intro h2{
+margin-top:15px;
+font-size:20px;
+opacity:0;
+animation:fadeIn 2s forwards 1.5s;
+}
+
+@keyframes fadeIn{
+to{opacity:1;}
+}
+
+/* ================= FORM ================= */
+
+.container{
+display:none;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+.card{
+width:100%;
+max-width:650px;
+background:#050712;
+border-radius:30px;
+padding:40px;
+border:2px solid #00aaff;
+box-shadow:0 0 25px #00aaff,0 0 60px #0077ff inset;
+}
+
+.header{text-align:center;margin-bottom:30px;}
+.header h1{
+font-size:28px;
+color:#00c3ff;
+text-shadow:0 0 20px #00aaff;
+}
+.header p{opacity:0.7;margin-top:10px;}
+
+.input-group{margin-bottom:18px;}
+label{display:block;margin-bottom:6px;font-size:14px;opacity:0.8;}
+
+input,textarea{
+width:100%;
+padding:14px;
+background:#0b0f1f;
+border:1px solid #1b2a4a;
+border-radius:14px;
+color:white;
+outline:none;
+}
+
+textarea{resize:none;height:90px;}
+
+.status-group{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.status-group input{display:none;}
+
+.status-group label{
+padding:12px;
+text-align:center;
+border:1px solid #1b2a4a;
+border-radius:14px;
+cursor:pointer;
+background:#0b0f1f;
+}
+
+.status-group input:checked + label{
+background:#00aaff;
+color:black;
+}
+
+button{
+margin-top:15px;
+width:100%;
+padding:15px;
+border:none;
+border-radius:20px;
+font-size:16px;
+cursor:pointer;
+background:linear-gradient(90deg,#00aaff,#0077ff);
+color:white;
+box-shadow:0 0 20px #00aaff;
+}
+</style>
+</head>
+<body>
+
+<!-- INTRO -->
+<div class="intro" id="intro">
+<h1>Welcome To ISA Community</h1>
+<h2>Indonesian Space Astronomy</h2>
+</div>
+
+<!-- FORM -->
+<div class="container" id="main">
+<div class="card">
+
+<div class="header">
+<h1>ISA Creator Registration</h1>
+<p>Join Our Astronomy Movement 🚀</p>
+</div>
+
+<form id="form">
+
+<div class="input-group">
+<label>Nama Lengkap</label>
+<input type="text" id="nama" required>
+</div>
+
+<div class="input-group">
+<label>Umur</label>
+<input type="number" id="umur" required>
+</div>
+
+<div class="input-group">
+<label>Status</label>
+<div class="status-group">
+<input type="radio" name="status" value="Pelajar" id="s1" required>
+<label for="s1">Pelajar</label>
+
+<input type="radio" name="status" value="Mahasiswa" id="s2">
+<label for="s2">Mahasiswa</label>
+
+<input type="radio" name="status" value="Pekerja" id="s3">
+<label for="s3">Pekerja</label>
+
+<input type="radio" name="status" value="Lainnya" id="s4">
+<label for="s4">Lainnya</label>
+</div>
+</div>
+
+<div class="input-group">
+<label>Alasan Bergabung</label>
+<textarea id="alasan" required></textarea>
+</div>
+
+<div class="input-group">
+<label>Pengetahuan Astronomi</label>
+<textarea id="pengetahuan" required></textarea>
+</div>
+
+<div class="input-group">
+<label>Username TikTok</label>
+<input type="text" id="username" required>
+</div>
+
+<button type="submit">Kirim Pendaftaran 🚀</button>
+</form>
+
+</div>
+</div>
+
+<script>
+
+/* Intro transition */
+setTimeout(()=>{
+document.getElementById("intro").style.opacity="0";
+setTimeout(()=>{
+document.getElementById("intro").style.display="none";
+document.getElementById("main").style.display="flex";
+document.body.style.overflow="auto";
+},1000);
+},3500);
+
+/* WhatsApp Submit */
+document.getElementById("form").addEventListener("submit",function(e){
+e.preventDefault();
+
+const nama=document.getElementById("nama").value;
+const umur=document.getElementById("umur").value;
+const status=document.querySelector('input[name="status"]:checked').value;
+const alasan=document.getElementById("alasan").value;
+const pengetahuan=document.getElementById("pengetahuan").value;
+const username=document.getElementById("username").value;
+
+const pesan=
+`Halo Admin ISA 🚀
+
+Saya ingin mendaftar Creator ISA
+
+Nama: ${nama}
+Umur: ${umur}
+Status: ${status}
+Username TikTok: @${username}
+
+Alasan:
+${alasan}
+
+Pengetahuan Astronomi:
+${pengetahuan}
+
+Terima kasih 🙌`;
+
+window.open("https://wa.me/6285215069370?text="+encodeURIComponent(pesan),"_blank");
+});
+</script>
+
+</body>
+  </html>
